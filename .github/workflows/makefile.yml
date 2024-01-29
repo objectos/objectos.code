@@ -19,8 +19,8 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '21-ea'
-        distribution: 'zulu'
+        java-version: '21'
+        distribution: 'temurin'
 
     - name: Cache local repository
       uses: actions/cache@v3
@@ -30,11 +30,5 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-objectos-
         
-    - name: Install dependencies
-      run: make
-
     - name: Run tests
       run: make test
-
-    - name: Run install
-      run: make install
