@@ -21,7 +21,7 @@
 ## Coordinates
 GROUP_ID := br.com.objectos
 ARTIFACT_ID := objectos.code
-VERSION := 0.1
+VERSION := 0.2-SNAPSHOT
 MODULE := $(ARTIFACT_ID)
 
 ## Resolution dir (required)
