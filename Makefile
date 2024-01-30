@@ -21,7 +21,7 @@
 ## Coordinates
 GROUP_ID := br.com.objectos
 ARTIFACT_ID := objectos.code
-VERSION := 0.2-SNAPSHOT
+VERSION := 0.2
 MODULE := $(ARTIFACT_ID)
 
 ## Resolution dir (required)
@@ -101,6 +101,17 @@ $(eval $(call TEST_RUN_TASK,,))
 
 include make/jar.mk
 $(eval $(call JAR_TASK,,))
+
+#
+# code@pom
+#
+
+## pom.xml description
+DESCRIPTION := Objectos Code is a Java library for generating Java source code. 
+
+include pom.mk
+include make/pom.mk
+$(eval $(call POM_TASK,,))
 
 #
 # code@install
