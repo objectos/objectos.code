@@ -107,7 +107,7 @@ $(eval $(call JAR_TASK,,))
 #
 
 ## pom.xml description
-DESCRIPTION := Objectos Code is a Java library for generating Java source code. 
+DESCRIPTION := Objectos Way allows you to build full-stack web applications using only Java. 
 
 include pom.mk
 include make/pom.mk
