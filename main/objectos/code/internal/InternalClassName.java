@@ -146,6 +146,10 @@ public final class InternalClassName implements ClassName {
     return toString;
   }
 
+  final boolean isNested() {
+    return names.length > 1;
+  }
+
   private ClassName nestedClass(String simpleName) {
     String[] copy;
     copy = Arrays.copyOf(names, names.length + 1);

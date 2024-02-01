@@ -15,10 +15,8 @@
  */
 package objectos.code;
 
-import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
-import objectos.code.Code.ImportList;
 import org.testng.annotations.Test;
 
 public class ReadmeTest {
@@ -31,14 +29,11 @@ public class ReadmeTest {
     String packageName;
     packageName = "com.example";
 
-    ImportList importList;
-    importList = code.importList(packageName);
-
     String simpleName;
     simpleName = "HelloWorld";
 
     assertEquals(
-      code."""
+        code."""
       package \{packageName};
 
       public class \{simpleName} {
@@ -48,7 +43,7 @@ public class ReadmeTest {
       }
       """,
 
-      """
+        """
       package com.example;
 
       public class HelloWorld {

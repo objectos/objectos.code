@@ -72,15 +72,25 @@ public final class CodeImportList implements Code.ImportList {
       if (simpleNames.add(simpleName)) {
         // this simple name has not been emitted yet
         result = simpleName;
+
+        if (className.isNested()) {
+          // type is nested, will need a full import
+
+          importTypes.add(fullName);
+        }
       } else {
         // the simple name of this type will conflict with the simple name of another type
         result = fullName;
       }
-    } else if (simpleNames.add(simpleName)) {
+    }
+
+    else if (simpleNames.add(simpleName)) {
       result = simpleName;
 
       importTypes.add(fullName);
-    } else {
+    }
+
+    else {
       // we will have to emit the full name of the type
       result = fullName;
     }

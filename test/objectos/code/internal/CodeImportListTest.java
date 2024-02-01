@@ -42,7 +42,7 @@ public class CodeImportListTest {
 
     assertEquals(list.process(type), "Serializable");
     assertEquals(importList(list), List.of(
-      "java.io.Serializable"));
+        "java.io.Serializable"));
   }
 
   @Test(description = """
@@ -107,7 +107,33 @@ public class CodeImportListTest {
     assertEquals(list.process(type1), "List");
     assertEquals(list.process(type2), "com.example.List");
     assertEquals(importList(list), List.of(
-      "java.util.List"));
+        "java.util.List"));
+  }
+
+  @Test(description = """
+  packageName: com.example;
+
+  import com.example.Outer.Inner;
+
+  com.example.Outer -> Outer
+  com.example.Outer.Inner -> Inner
+  """)
+  public void processClassName05() {
+    String packageName;
+    packageName = "com.example";
+
+    CodeImportList list;
+    list = new CodeImportList(packageName);
+
+    InternalClassName outer;
+    outer = InternalClassName.of(packageName, "Outer");
+
+    InternalClassName inner;
+    inner = InternalClassName.of(packageName, "Outer", "Inner");
+
+    assertEquals(list.process(outer), "Outer");
+    assertEquals(list.process(inner), "Inner");
+    assertEquals(importList(list), List.of("com.example.Outer.Inner"));
   }
 
   private List<String> importList(CodeImportList processor) {

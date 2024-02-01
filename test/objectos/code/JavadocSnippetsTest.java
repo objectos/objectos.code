@@ -17,10 +17,7 @@ package objectos.code;
 
 import static org.testng.Assert.assertEquals;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.function.Function;
 import objectos.code.Code.ImportList;
 import org.testng.annotations.Test;
 
@@ -60,9 +57,9 @@ public class JavadocSnippetsTest {
     // @end
 
     assertEquals(
-      result,
+        result,
 
-      """
+        """
       package com.example;
 
       import java.util.List;
@@ -99,9 +96,9 @@ public class JavadocSnippetsTest {
     // @end
 
     assertEquals(
-      result,
+        result,
 
-      """
+        """
       String asStringLiteral = "An \\"escape\\" function\\nexample!\\n";
       """
     );
@@ -132,9 +129,9 @@ public class JavadocSnippetsTest {
     // @end
 
     assertEquals(
-      result,
+        result,
 
-      """
+        """
       package com.example;
 
       import java.time.LocalDate;
@@ -175,9 +172,9 @@ public class JavadocSnippetsTest {
     // @end
 
     assertEquals(
-      result,
+        result,
 
-      """
+        """
       package com.example;
 
       interface Example02 {
@@ -215,9 +212,9 @@ public class JavadocSnippetsTest {
     // @end
 
     assertEquals(
-      result,
+        result,
 
-      """
+        """
       package com.example;
 
       import java.util.List;
