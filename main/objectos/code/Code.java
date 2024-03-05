@@ -185,7 +185,8 @@ public sealed interface Code
     sb = new StringBuilder(length);
 
     for (int i = 0; i < length; i++) {
-      char c = str.charAt(i);
+      char c;
+      c = str.charAt(i);
 
       switch (c) {
         case '\\' -> sb.append("\\\\");
