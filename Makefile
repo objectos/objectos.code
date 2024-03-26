@@ -22,85 +22,79 @@
 GROUP_ID := br.com.objectos
 ARTIFACT_ID := objectos.code
 VERSION := 0.4-SNAPSHOT
-MODULE := $(ARTIFACT_ID)
-
-## Resolution dir (required)
-RESOLUTION_DIR := work/resolution
 
 ## Deps versions
-SLF4J_VERSION := 1.7.36
-TESTNG_VERSION := 7.9.0
+SLF4J_NOP := org.slf4j/slf4j-nop/1.7.36
+TESTNG := org.testng/testng/7.9.0
 
 # Delete the default suffixes
 .SUFFIXES:
 
 #
-# Default target
+# code
 #
 
 .PHONY: all
 all: test
 
+include make/java-core.mk
+
 #
 # code@clean
 #
 
-## basedir
-BASEDIR := .
-
-include make/tools.mk
-include make/deps.mk
-include make/resolver.mk
-include make/clean.mk
-$(eval $(call CLEAN_TASK,,))
+include make/common-clean.mk
 
 #
 # code@compile
 #
 
 ## javac --release option
-JAVA_RELEASE = 21
+JAVA_RELEASE := 21
 
 ## --enable-preview ?
-ENABLE_PREVIEW = 1
+ENABLE_PREVIEW := 1
 
 ## resolution trigger
 RESOLUTION_REQS := Makefile
 
-include make/compile.mk
-$(eval $(call COMPILE_TASK,,))
+include make/java-compile.mk
 
 #
 # code@test-compile
 #
 
 ## test compile deps
-TEST_COMPILE_DEPS := $(COMPILE_MARKER)
-TEST_COMPILE_DEPS += $(RESOLUTION_DIR)/org.testng/testng/$(TESTNG_VERSION)
+TEST_COMPILE_DEPS := $(TESTNG)
 
-include make/test-compile.mk
-$(eval $(call TEST_COMPILE_TASK,,))
+include make/java-test-compile.mk
 
 #
 # code@test
 #
 
+## test main class
+TEST_MAIN := objectos.code.RunTests
+
 ## www test runtime dependencies
-TEST_RUNTIME_DEPS := $(TEST_COMPILE_DEPS)
-TEST_RUNTIME_DEPS += $(RESOLUTION_DIR)/org.slf4j/slf4j-nop/$(SLF4J_VERSION)
+TEST_RUNTIME_DEPS := $(SLF4J_NOP)
+
+## test modules
+TEST_ADD_MODULES := org.testng
+
+## test --add-reads
+TEST_ADD_READS := objectos.code=org.testng
 
 ## test runtime exports
-TEST_JAVAX_EXPORTS := objectos.code.internal
+TEST_ADD_EXPORTS := objectos.code/objectos.code.internal=org.testng
 
-include make/test-run.mk
-$(eval $(call TEST_RUN_TASK,,))
+include make/java-test.mk
 
 #
 # code@jar
 #
 
-include make/jar.mk
-$(eval $(call JAR_TASK,,))
+include make/java-jar.mk
 
 #
 # code@pom
@@ -109,13 +103,8 @@ $(eval $(call JAR_TASK,,))
 ## pom.xml description
 DESCRIPTION := Objectos Way allows you to build full-stack web applications using only Java. 
 
-include pom.mk
-include make/pom.mk
-$(eval $(call POM_TASK,,))
-
 #
 # code@install
 #
 
-include make/install.mk
-$(eval $(call INSTALL_TASK,,))
+include make/java-install.mk

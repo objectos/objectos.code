@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2023 Objectos Software LTDA.
+# Copyright (C) 2023-2024 Objectos Software LTDA.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,30 +18,14 @@
 # clean task
 #
 
-ifndef RESOLUTION_DIR
-$(error The required variable RESOLUTION_DIR was not defined)
-endif
-
-define CLEAN_TASK
-
-ifndef $(1)BASEDIR
-$(1)BASEDIR = $$($(1)MODULE)
-endif
-
-## work dir
-$(1)WORK = $$($(1)BASEDIR)/work
+## working directory
+WORK = work
 
 ## targets
 
-.PHONY: $(2)clean
-$(2)clean:
-ifneq ($$($(1)WORK),)
-	rm -rf $$($(1)WORK)/* $$($(1)COMPILE_MARKER)
-else
-	rm -f $$($(1)COMPILE_MARKER)
-endif
+.PHONY: clean
+clean:
+	rm -rf $(WORK)/*
 
-$$($(1)WORK):
-	mkdir --parents $$@
-	
-endef
+$(WORK):
+	mkdir --parents $@
