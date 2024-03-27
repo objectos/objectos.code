@@ -50,7 +50,7 @@ include make/common-clean.mk
 #
 
 ## javac --release option
-JAVA_RELEASE := 21
+JAVA_RELEASE := 22
 
 ## --enable-preview ?
 ENABLE_PREVIEW := 1
