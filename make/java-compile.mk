@@ -104,16 +104,13 @@ JAVACX += --module-version $(VERSION)
 
 endif
 
-## javac --release option
-ifndef JAVA_RELEASE
-JAVA_RELEASE := 21
-endif
-
 ## common javac trailing options
 ifeq ($(ENABLE_PREVIEW),1)
 JAVACX += --enable-preview
 endif
+ifdef JAVA_RELEASE
 JAVACX += --release $(JAVA_RELEASE)
+endif
 JAVACX += --source-path $(MAIN)
 JAVACX += @$(COMPILE_SOURCES)
 
@@ -180,7 +177,8 @@ $(CLASSES): $(CLASS_OUTPUT)/%.class: $(MAIN)/%.java
 	$(eval DIRTY += $$<)
 
 $(COMPILE_MARKER): $(COMPILE_REQS)
-	@echo -n "$(strip $(DIRTY))" > $(COMPILE_SOURCES)
+	$(file > $(COMPILE_SOURCES).tmp,$(strip $(DIRTY)))
+	cat $(COMPILE_SOURCES).tmp | tr -d '\n' > $(COMPILE_SOURCES)
 	if [ -s $(COMPILE_SOURCES) ]; then \
 		$(JAVACX); \
 	fi

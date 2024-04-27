@@ -21,7 +21,7 @@
 ## Coordinates
 GROUP_ID := br.com.objectos
 ARTIFACT_ID := objectos.code
-VERSION := 0.4-SNAPSHOT
+VERSION := 0.4
 
 ## Deps versions
 SLF4J_NOP := org.slf4j/slf4j-nop/1.7.36
