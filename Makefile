@@ -37,6 +37,9 @@ TESTNG := org.testng/testng/7.9.0
 .PHONY: all
 all: test
 
+## use JDK 22
+JAVA_HOME := /opt/jdk-22
+
 include make/java-core.mk
 
 #
